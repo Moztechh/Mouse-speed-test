@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>body {font-family: Arial, sans-serif;background-color: #f0f0f0;margin: 0;display: flex;align-items: center;justify-content: center;height: 100vh; }
+    #game-container {text-align: center;padding: 20px;background-color: #fff;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);border-radius: 8px;}
+  </style> <title>Interactive Game with Timer</title>
+</head><body>
+  <div id="game-container">
+    <h1>Click the Button!</h1>
+    <p id="score">Score: 0</p>
+    <p id="timer">Time left: 10</p>
+    <button id="clickButton" onclick="increaseScore()">Click me!</button>
+    <script>
+     let score = 0, countdown= 10, timer;
+     function increaseScore() {
+      score++;
+      document.getElementById('score').textContent = 'Score: '+ score;
+      moveButton();}
+      function moveButton() {
+        const button = document.getElementById('clickButton');
+        const maxX = window.innerWidth - button.offsetWidth;
+        const maxY = window.innerHeight - button.offsetHeight;
+        const newX = Math.random() * maxX;
+        const newY = Math.random() * maxY;
+        button.style.position = 'absolute';
+        button.style.left = newX + 'px';
+        button.style.top = newY + 'px';}
+      function startTimer() {
+        countdown--;
+        document.getElementById('timer').textContent = 'Time Left: ' + countdown;
+        if (countdown <= 0) {
+          clearInterval(timer);
+          alert('Gameo ver! Your final score is: ' + score);
+          resetGame();}}
+        function resetGame() {
+          score = 0, countdown = 10;
+          document.getElementById('score').textContent = 'Score: ' + score;
+          document.getElementById('timer').textContent = 'Time left: 10';
+          startTimer();
+          timer = setInterval(startTimer, 1000);}
+        window.onload = function() {
+          startTimer();
+          timer - setInterval(startTimer, 1000)}
+        </script></div></body></html>
